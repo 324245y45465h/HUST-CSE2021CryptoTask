@@ -4,9 +4,9 @@
         printf("ERROR\n"); \
         continue;          \
     }
-#define MIN_DIFF 1LL << 31
-#define MIN_E 1LL << 32
-#define MAX_GCD 1LL << 4
+#define MIN_DIFF 1 << 31
+#define MIN_E 1 << 32
+#define MAX_GCD 1 << 4
 
 int n;
 
@@ -91,7 +91,7 @@ bool my_mpz_invert(mpz_t rop, const mpz_t op1, const mpz_t op2) {
 }
 
 int main() {
-    // freopen("test.in", "r", stdin);
+    freopen("test.in", "r", stdin);
     // freopen("test.out", "w", stdout);
     scanf("%d", &n);
     mpz_t e, p, q, d, N, phi_N;

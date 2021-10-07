@@ -90,7 +90,6 @@ void pkcs7_decrypt() {
     if (!p7Cipher) ERR;
 
     BIO* p7PlainBio = PKCS7_dataDecode(p7Cipher, getpkey(pkeyB), NULL, NULL);
-    printf("!!!\n");
     if (!p7PlainBio) ERR;
 
     X509* cert = getX509(cacert);
@@ -109,7 +108,7 @@ void pkcs7_decrypt() {
 }
 
 int main() {
-    freopen("test.in", "r", stdin);
+    // freopen("test.in", "r", stdin);
     ERR_load_crypto_strings();
     OpenSSL_add_all_algorithms();
     pkcs7_decrypt();

@@ -23,7 +23,8 @@ void my_mpz_powm(mpz_t res, mpz_t m, mpz_t e, mpz_t n) {
 }
 
 int main() {
-    // freopen("t6.in", "r", stdin);
+    // freopen("test.in", "r", stdin);
+    // freopen("test.out", "w", stdout);
     mpz_t e, m, p, q;
     scanf("%d", &n);
     for (int i = 0; i < n; ++i) {

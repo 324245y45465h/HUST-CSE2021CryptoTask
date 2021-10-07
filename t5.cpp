@@ -5,7 +5,7 @@
         continue;          \
     }
 #define MIN_DIFF 1 << 31
-#define MIN_E 1 << 32
+#define MIN_E 1 << 16
 #define MAX_GCD 1 << 4
 
 int n;
@@ -59,7 +59,7 @@ bool my_mpz_invert(mpz_t rop, const mpz_t op1, const mpz_t op2) {
     mpz_init_set_ui(y1, 0);
     mpz_init_set_ui(y2, 1);
     mpz_init_set(y3, op1);
-    if (mpz_cmp(x3, y3) > 0) mpz_swap(x3, y3);
+    if (mpz_cmp(x3, y3) < 0) mpz_swap(x3, y3);
     mpz_inits(p, k, z1, z2, z3, (mpz_ptr)0);
     while (1) {
         if (!mpz_cmp_ui(y3, 0)) {
@@ -91,7 +91,7 @@ bool my_mpz_invert(mpz_t rop, const mpz_t op1, const mpz_t op2) {
 }
 
 int main() {
-    freopen("test.in", "r", stdin);
+    // freopen("test.in", "r", stdin);
     // freopen("test.out", "w", stdout);
     scanf("%d", &n);
     mpz_t e, p, q, d, N, phi_N;

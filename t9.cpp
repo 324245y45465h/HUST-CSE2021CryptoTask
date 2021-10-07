@@ -123,8 +123,8 @@ bool findStr(char res[MAX_STR_LEN], unsigned int sha1[5]) {
 }
 
 int main() {
-    bool flg = false;
     // freopen("test.in", "r", stdin);
+    bool flg = false;
     scanf("%d", &n);
     for (int i = 0; i < n; ++i) scanf("%s%s", headStr + i, tailStr + i);
     for (int i = 0; i < 5; ++i) scanf("%8x", sha1 + i);

@@ -1,6 +1,6 @@
+#include <cctype>
 #include <cstdio>
 #include <cstring>
-#include <cctype>
 #define MAX_G1 10
 #define MAX_G2 10
 #define STARTX 12345
@@ -18,31 +18,24 @@ uchar maxl1, maxl2, maxl3, maxl4;
 uchar u41, u42, u43, u44, z;
 unsigned int key;
 
-ushort sbox4[16] = {
-    0xE, 0x4, 0xD, 0x1, 0x2, 0xF, 0xB, 0x8, 
-    0x3, 0xA, 0x6, 0xC, 0x5, 0x9, 0x0, 0x7
-};
-ushort resbox4[16] = {
-    0xe, 0x3, 0x4, 0x8, 0x1, 0xc, 0xa, 0xf, 
-    0x7, 0xd, 0x9, 0x6, 0xb, 0x2, 0x0, 0x5
-};
+ushort sbox4[16] = {0xE, 0x4, 0xD, 0x1, 0x2, 0xF, 0xB, 0x8,
+                    0x3, 0xA, 0x6, 0xC, 0x5, 0x9, 0x0, 0x7};
+ushort resbox4[16] = {0xe, 0x3, 0x4, 0x8, 0x1, 0xc, 0xa, 0xf,
+                      0x7, 0xd, 0x9, 0x6, 0xb, 0x2, 0x0, 0x5};
 ushort sbox16[0x10000], spbox16[0x10000];
-ushort pos[16] = {
-    0x8000, 0x4000, 0x2000, 0x1000, 0x0800, 0x0400, 0x0200, 0x0100,
-    0x0080, 0x0040, 0x0020, 0x0010, 0x0008, 0x0004, 0x0002, 0x0001};
-ushort pBox[16] = {
-    0x8000, 0x0800, 0x0080, 0x0008, 0x4000, 0x0400, 0x0040, 0x0004,
-    0x2000, 0x0200, 0x0020, 0x0002, 0x1000, 0x0100, 0x0010, 0x0001};
+ushort pos[16] = {0x8000, 0x4000, 0x2000, 0x1000, 0x0800, 0x0400,
+                  0x0200, 0x0100, 0x0080, 0x0040, 0x0020, 0x0010,
+                  0x0008, 0x0004, 0x0002, 0x0001};
+ushort pBox[16] = {0x8000, 0x0800, 0x0080, 0x0008, 0x4000, 0x0400,
+                   0x0040, 0x0004, 0x2000, 0x0200, 0x0020, 0x0002,
+                   0x1000, 0x0100, 0x0010, 0x0001};
 
 void initSPbox() {
     for (int i = 0; i < 0x10000; ++i) {
-        sbox16[i] = (sbox4[i >> 12] << 12) 
-            | (sbox4[(i >> 8) & 0xf] << 8)
-            | (sbox4[(i >> 4) & 0xf] << 4)
-            | (sbox4[i & 0xf]);
+        sbox16[i] = (sbox4[i >> 12] << 12) | (sbox4[(i >> 8) & 0xf] << 8) |
+                    (sbox4[(i >> 4) & 0xf] << 4) | (sbox4[i & 0xf]);
         for (int j = 0; j < 16; ++j)
-            if (sbox16[i] & pos[j]) 
-                spbox16[i] |= pBox[j];
+            if (sbox16[i] & pos[j]) spbox16[i] |= pBox[j];
     }
 }
 
@@ -67,16 +60,18 @@ unsigned int read() {
     while (ch < '0') ch = getchar();
     int i = 4;
     while (i--) {
-        if (isdigit(ch)) x = x * 16 + (ch - '0');
-        else x = x * 16 + (ch - 'a') + 10;
+        if (isdigit(ch))
+            x = x * 16 + (ch - '0');
+        else
+            x = x * 16 + (ch - 'a') + 10;
         ch = getchar();
     }
     return x;
 }
 
 int main() {
-    // freopen("t3.in", "r", stdin);
-    // freopen("t3my.out", "w", stdout);
+    // freopen("test.in", "r", stdin);
+    // freopen("test.out", "w", stdout);
     scanf("%d", &n);
     initSPbox();
     for (int i = 0; i < n; ++i) {
@@ -86,7 +81,7 @@ int main() {
         for (int j = 0; j < 0x10000; ++j) {
             ciphers[j] = read();
         }
-        
+
         ushort xx = 0x0b00;
         for (ushort x1 = STARTX; x1 < ENDX; ++x1) {
             uchar v421, v441, u421, u441, v422, v442, u422, u442;
@@ -104,8 +99,8 @@ int main() {
                     v442 = l4 ^ (y2 & 0xf);
                     u422 = resbox4[v422];
                     u442 = resbox4[v442];
-                    cnt[l2][l4] += ((u421 ^ u422) == 0x6 && (u441 ^ u442) == 0x6) & 0x1u;
-
+                    cnt[l2][l4] +=
+                        ((u421 ^ u422) == 0x6 && (u441 ^ u442) == 0x6) & 0x1u;
                 }
             }
         }
@@ -127,8 +122,8 @@ int main() {
                     v432 = l3 ^ ((y2 >> 4) & 0xf);
                     u412 = resbox4[v412];
                     u432 = resbox4[v432];
-                    cnt2[l1][l3] += ((u411 ^ u412) == 0x5 && (u431 ^ u432) == 0x5) & 0x1u;
-
+                    cnt2[l1][l3] +=
+                        ((u411 ^ u412) == 0x5 && (u431 ^ u432) == 0x5) & 0x1u;
                 }
             }
         }
@@ -158,9 +153,10 @@ int main() {
                     }
                 }
                 used[maxl1][maxl3] = true;
-                ushort rear16BitKey = 
+                ushort rear16BitKey =
                     (maxl1 << 12) | (maxl2 << 8) | (maxl3 << 4) | maxl4;
-                for (int front16BitKey = 0; front16BitKey <= 0xffff; ++front16BitKey) {
+                for (int front16BitKey = 0; front16BitKey <= 0xffff;
+                     ++front16BitKey) {
                     key = (front16BitKey << 16) | rear16BitKey;
                     ushort test1 = 0x3647, test2 = 0x45ab;
                     if (SPN(test1) != ciphers[test1]) continue;

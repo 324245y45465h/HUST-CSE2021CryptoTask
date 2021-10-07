@@ -65,7 +65,15 @@ bool my_mpz_invert(mpz_t rop, mpz_t op1, mpz_t op2) {
     return true;
 }
 
-void my_rsa_crt(mpz_t res, mpz_t c, mpz_t d, mpz_t p, mpz_t q, mpz_t dp, mpz_t dq, mpz_t qinv, mpz_t N) {
+void my_rsa_crt(mpz_t res,
+                mpz_t c,
+                mpz_t d,
+                mpz_t p,
+                mpz_t q,
+                mpz_t dp,
+                mpz_t dq,
+                mpz_t qinv,
+                mpz_t N) {
     mpz_t m1, m2, h, tmp;
     mpz_inits(m1, m2, h, tmp, (mpz_ptr)0);
     mpz_powm(m1, c, dp, p);
@@ -81,8 +89,8 @@ void my_rsa_crt(mpz_t res, mpz_t c, mpz_t d, mpz_t p, mpz_t q, mpz_t dp, mpz_t d
 }
 
 int main() {
-    freopen("t7.in", "r", stdin);
-    freopen("t7.out", "w", stdout);
+    // freopen("t7.in", "r", stdin);
+    // freopen("t7.out", "w", stdout);
     mpz_t p, q, dp, dq, qinv, e, d, c, res, p1, q1, N, phi_N;
     mpz_inits(p, q, dp, dq, qinv, e, d, c, res, p1, q1, N, phi_N, (mpz_ptr)0);
     scanf("%d", &n);
